@@ -1,5 +1,12 @@
+airflow.cfg
+airflow.db
+spy_data
+*.png
+
 **/.DS_Store
 .DS_Store
+
+.idea/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
