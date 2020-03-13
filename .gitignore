@@ -1,7 +1,12 @@
+logs/
+*.cfg
+unittests.cfg
 airflow.cfg
 airflow.db
 spy_data
+*.csv
 *.png
+logs/scheduler/**/**
 
 **/.DS_Store
 .DS_Store

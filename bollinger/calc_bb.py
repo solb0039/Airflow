@@ -92,7 +92,7 @@ def get_spy_data(**context):
                               dag=context.get("dag"))
 
     # Populate db
-    stock_data.to_csv('./spy_data')
+    stock_data.to_csv('./spy_data.csv')
 
 
 
