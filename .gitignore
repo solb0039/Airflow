@@ -7,6 +7,9 @@ spy_data
 *.csv
 *.png
 logs/scheduler/**/**
+*.err
+*.log
+*.out
 
 **/.DS_Store
 .DS_Store
@@ -20,6 +23,7 @@ __pycache__/
 
 # C extensions
 *.so
+
 
 # Distribution / packaging
 .Python
