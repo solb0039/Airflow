@@ -16,7 +16,7 @@ def plot():
     '''
 
     # Read data
-    df = pd.read_csv('./spy_data')
+    df = pd.read_csv('./spy_data.csv')
 
     # Plot and save
     try:
