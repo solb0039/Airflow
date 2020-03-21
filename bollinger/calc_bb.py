@@ -16,7 +16,7 @@ def plot():
     '''
 
     # Read data
-    df = pd.read_csv('./spy_data.csv')
+    df = pd.read_csv('/tmp/spy_data.csv')
 
     # Plot and save
     try:
@@ -92,7 +92,7 @@ def get_spy_data(**context):
                               dag=context.get("dag"))
 
     # Populate db
-    stock_data.to_csv('./spy_data.csv')
+    stock_data.to_csv('/tmp/spy_data.csv')
 
 
 
