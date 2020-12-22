@@ -24,7 +24,7 @@ default_args = {
     # 'end_date': datetime(2016, 1, 1),
 }
 
-dag = DAG('bollinger', default_args=default_args, schedule_interval="*/30 * * * 1-5")
+dag = DAG('bollinger', default_args=default_args, schedule_interval="*/30 6-14 * * 1-5")
 
 t1 = PythonOperator(
     task_id='bb',

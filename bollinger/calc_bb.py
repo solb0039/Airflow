@@ -11,8 +11,7 @@ API_KEY = connection.password
 
 def plot():
     '''
-
-    :return:
+    :return: None
     '''
 
     # Read data
@@ -27,7 +26,7 @@ def plot():
         df.plot(x='Date', y='lbb', ax=ax)
         ax.set_xlabel("Date")
         ax.set_ylabel("Price")
-        ax.get_figure().savefig('./BollingerBands')
+        ax.get_figure().savefig('/var/tmp/BollingerBands')
 
     except Exception as e:
         print(e)
@@ -68,32 +67,31 @@ def get_spy_data(**context):
         dates.append(k)
         closings.append(v['5. adjusted close'])
 
-    d = {'Date': dates, 'AdjClose': closings}
+    df = {'Date': dates, 'AdjClose': closings}
 
-    stock_data = work_up_data(d)
+    stock_data = work_up_data(df)
+
+    email = EmailOperator(task_id="email_task",
+                          to="seanmsolberg@gmail.com",
+                          subject = '',
+                          html_content= '',
+                          dag=context.get("dag"))
 
     # Send email based on conditions
     if stock_data.iloc[-1]['buy'] == 1:
         print("BUY!!!!")
-        email = EmailOperator(task_id="email_task",
-                              to="seanmsolberg@gmail.com",
-                              subject="BUT SOME SPY STOCK!",
-                              html_content="Bollinger bands say to buy some SPY",
-                              dag=context.get("dag"))
-
+        email.subject = "BUT SOME SPY STOCK!"
+        email.html_content = "Bollinger bands say to buy some SPY"
         email.execute(context=context)
 
     if stock_data.iloc[-1]['sell'] == 1:
         print("SELL!!!!")
-        email = EmailOperator(task_id="email_task",
-                              to="seanmsolberg@gmail.com",
-                              subject="SELL SOME SPY STOCK!",
-                              html_content="Bollinger bands say to sell SPY",
-                              dag=context.get("dag"))
+        email.subject = "SELL SOME SPY STOCK!"
+        email.html_content = "Bollinger bands say to sell SPY"
+        email.execute(context=context)
 
     # Populate db
     stock_data.to_csv('/tmp/spy_data.csv')
-
 
 
 if __name__ == '__main__':
